@@ -1,3 +1,4 @@
+from collections import defaultdict
 import Tkinter as tk
 
 class Example(tk.Frame):
@@ -16,16 +17,17 @@ class Example(tk.Frame):
 
         self.frame.bind("<Configure>", self.onFrameConfigure)
 
-        self.lines = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","20A","21","22","23","24","25","26","26A","27","28","29","30"] 
+        self.lines = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","20A","21","22","23","24","25","26","26A","27","28","29","30"] 
         self.repeating_lines = ["20","26","27","30"]
-        self.ignore_lines = ["2","15","28","29"]
+        self.ignore_lines = ["02","15","28","29"]
         self.layout = []
+        self.entries = []
         self.line_numbers = 0
         self.create_lines()
         self.render_lines()
 
     def create_entries(self, line_id):
-        if line_id == "1":
+        if line_id == "01":
             self.layout.append( (tk.Label(self.frame, text = "File Type: ", width = 7),(self.line_numbers, 2),line_id) )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
@@ -41,7 +43,7 @@ class Example(tk.Frame):
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 7),line_id+":C") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=7)
             
-        elif line_id == "3":
+        elif line_id == "03":
             self.layout.append( (tk.Label(self.frame, text = "Total: ", width = 7),(self.line_numbers, 2),line_id) )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
@@ -70,7 +72,7 @@ class Example(tk.Frame):
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 13),line_id+":I") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=13)
             
-        elif line_id in ["4","5","6","7","8","9","10","11","12"]:
+        elif line_id in ["04","05","06","07","08","09","10","11","12"]:
             self.layout.append( (tk.Label(self.frame, text = "Total: ", width = 7),(self.line_numbers, 2),line_id) )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":B") )
@@ -350,10 +352,41 @@ class Example(tk.Frame):
         self.create_entries("30")
         self.layout.append( (tk.Label(self.frame, relief="groove", text="Line 30", width = 8),(self.line_numbers, 1),"20") )
         self.layout[len(self.layout)-1][0].grid(row=self.line_numbers,column=1)
+
+    def get_entries(self):
+        self.entries = defaultdict(list)
+        for widget in self.layout:
+            if widget[2][-2] == ":":
+                    self.entries[widget[2][:2]].append(widget[0])
+
+        self.write_lines()
+
+    def write_lines(self):
+        
+        with open('file.instrs', 'wb+') as f:
+            
+            for line in self.lines:
+                entries_number = len(self.entries[line])
+                data = iter(self.entries[line])
+
+                # WRITE EACH LINE TO CALPALYN READABLE FILE
+                if line == "01":
+                        f.write(data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:9])
+                        f.write('\n')
+
+                elif line == "30":
+                    for i in range(entries_number/2):
+                        if (i+1) != (entries_number/2):
+                            f.write('0' + ' ' + data.next().get()[:7] + ' ' + data.next().get()[:1])
+                        else:
+                            f.write('1' + ' ' + data.next().get()[:7] + ' ' + data.next().get()[:1])
+                        f.write('\n')
+
+            
         
     def create_lines(self):
         self.line_numbers += 1
-        self.layout.append( (tk.Button(self.frame, text="Generate File", command= None, width = 10),(1,1), "button") )
+        tk.Button(self.frame, text="Generate File", command= self.get_entries, width = 10).grid(row=1,column=1)
         for line in self.lines:
             self.line_numbers += 1
             if line not in self.ignore_lines:
