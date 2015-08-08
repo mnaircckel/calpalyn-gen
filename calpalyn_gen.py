@@ -1,10 +1,12 @@
 from collections import defaultdict
 import Tkinter as tk
+import wckToolTips
 
 class Example(tk.Frame):
     def __init__(self, root):
 
         tk.Frame.__init__(self, root)
+        root.attributes('-fullscreen', True)
         self.canvas = tk.Canvas(root, borderwidth=0, background="#ffffff")
         self.frame = tk.Frame(self.canvas, background="#ffffff")
         self.vsb = tk.Scrollbar(root, orient="vertical", command=self.canvas.yview)
@@ -25,10 +27,11 @@ class Example(tk.Frame):
         self.line_numbers = 0
         self.create_lines()
         self.render_lines()
+        self.set_tooltip_entries()
 
     def create_entries(self, line_id):
         if line_id == "01":
-            self.layout.append( (tk.Label(self.frame, text = "File Type: ", width = 7),(self.line_numbers, 2),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "File Type: ", width = 7),(self.line_numbers, 2),line_id+"!file_type") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
@@ -360,6 +363,11 @@ class Example(tk.Frame):
                     self.entries[widget[2][:2]].append(widget[0])
 
         self.write_lines()
+
+    def set_tooltip_entries(self):
+        for widget in self.layout:
+            if widget[2][-2] == "!":
+                wckToolTips.register(widget[0], "This entry is used for x.")
 
     def write_lines(self):
         
