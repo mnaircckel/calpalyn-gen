@@ -76,7 +76,7 @@ class Example(tk.Frame):
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=13)
             
         elif line_id in ["04","05","06","07","08","09","10","11","12"]:
-            self.layout.append( (tk.Label(self.frame, text = "Total: ", width = 7),(self.line_numbers, 2),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Subtotal: ", width = 7),(self.line_numbers, 2),line_id) )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":B") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
@@ -120,11 +120,6 @@ class Example(tk.Frame):
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 5),line_id+":B") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=5)
-
-            self.layout.append( (tk.Label(self.frame, text = "Extra Taxa: ", width = 10),(self.line_numbers, 6),line_id) )
-            self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=6)
-            self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 7),line_id+":C") )
-            self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=7)
 
         elif line_id == "20":
             self.layout.append( (tk.Label(self.frame, text = "Taxon: ", width = 6),(self.line_numbers, 2),line_id) )
@@ -360,7 +355,10 @@ class Example(tk.Frame):
         self.entries = defaultdict(list)
         for widget in self.layout:
             if widget[2][-2] == ":":
-                    self.entries[widget[2][:2]].append(widget[0])
+                    if widget[2][:3] in ["20A","26A"]:
+                        self.entries[widget[2][:3]].append(widget[0])
+                    else:
+                        self.entries[widget[2][:2]].append(widget[0])
 
         self.write_lines()
 
@@ -374,6 +372,7 @@ class Example(tk.Frame):
         with open('file.instrs', 'wb+') as f:
             
             for line in self.lines:
+                print(line)
                 entries_number = len(self.entries[line])
                 data = iter(self.entries[line])
 
@@ -382,12 +381,64 @@ class Example(tk.Frame):
                         f.write(data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:9])
                         f.write('\n')
 
-                elif line == "30":
-                    for i in range(entries_number/2):
-                        if (i+1) != (entries_number/2):
-                            f.write('0' + ' ' + data.next().get()[:7] + ' ' + data.next().get()[:1])
+                elif line == "03":
+                        f.write(data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1])
+                        f.write('\n')
+
+                elif line in ["04","05","06","07","08","09","10","11","12"]:
+                        f.write('1' + ' ' + data.next().get()[:75])
+                        f.write('\n')
+
+                elif line == "13":
+                        f.write(data.next().get()[:1])
+                        f.write('\n')
+
+                elif line == "14":
+                        f.write(data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1])
+                        f.write('\n')
+
+                elif line == "16":
+                        f.write(data.next().get()[:1])
+                        f.write('\n')
+                        
+                elif line in ["17", "18", "19"]:
+                        f.write(data.next().get()[:1] + ' ' + data.next().get()[:5])
+                        f.write('\n')
+
+                elif line == "20":
+                    for i in range(entries_number/6):
+                        
+                        dataB = data.next().get()[:5]
+                        dataC = data.next().get()[:1]
+                        dataD = data.next().get()[:5]
+                        dataF = data.next().get()[:1]
+                        dataI = data.next().get()[:6]
+                        dataJ = data.next().get()[:30]
+                                                  
+                        if (i+1) != (entries_number/6):
+                            
+                            f.write('0' + ' ' + dataB + ' '*(5-len(dataB)) + ' ' + dataC + ' ' + dataD + ' '*(5-len(dataD)) + ' '*22 + dataF + ' 0    ' + dataI + ' '*(6-len(dataB)) + ' ' + dataJ )
                         else:
-                            f.write('1' + ' ' + data.next().get()[:7] + ' ' + data.next().get()[:1])
+                            f.write('1' + ' ' + dataB + ' '*(5-len(dataB)) + ' ' + dataC + ' ' + dataD + ' '*(5-len(dataD)) + ' '*22 + dataF + ' 0    ' + dataI + ' '*(6-len(dataB)) + ' ' + dataJ )
+                            
+                        f.write('\n')
+                        
+                        
+
+                elif line == "21":
+                        f.write(data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1])
+                        f.write('\n')                  
+
+                elif line == "24":
+                        f.write(data.next().get()[:40])
+                        f.write('\n')
+
+                elif line == "25":
+                        f.write(data.next().get()[:80])
+                        f.write('\n')
+
+                elif line == "26A":
+                        f.write(data.next().get()[:30])
                         f.write('\n')
 
             
