@@ -51,20 +51,23 @@ class Example(tk.Frame):
 
     def create_entries(self, line_id):
         if line_id == "01":
-            self.layout.append( (tk.Label(self.frame, text = "File Type: ", width = 7),(self.line_numbers, 2),line_id+"!file_type") )
+            self.layout.append( (tk.Label(self.frame, text = "File Type * : ", width = 9),(self.line_numbers, 2),line_id+"!file_type") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
+            self.layout[len(self.layout)-1][0].insert(0,0)
         
-            self.layout.append( (tk.Label(self.frame, text = "Factor: ", width = 7),(self.line_numbers, 4),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Factor * : ", width = 9),(self.line_numbers, 4),line_id) )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 5),line_id+":B") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=5)
+            self.layout[len(self.layout)-1][0].insert(0,0)
 
-            self.layout.append( (tk.Label(self.frame, text = "Number: ", width = 7),(self.line_numbers, 6),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Number * : ", width = 9),(self.line_numbers, 6),line_id) )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=6)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 7),line_id+":C") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=7)
+            self.layout[len(self.layout)-1][0].insert(0,-1.0)
             
         elif line_id == "03":
             self.layout.append( (tk.Label(self.frame, text = "Total: ", width = 7),(self.line_numbers, 2),line_id) )
@@ -102,33 +105,40 @@ class Example(tk.Frame):
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
             
         elif line_id == "13":
-            self.layout.append( (tk.Label(self.frame, text = "Names File: ", width = 10),(self.line_numbers, 2),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Names File * : ", width = 11),(self.line_numbers, 2),line_id) )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
+            self.layout[len(self.layout)-1][0].insert(0,1)
             
         elif line_id == "14":
-            self.layout.append( (tk.Label(self.frame, text = "Raw Data: ", width = 10),(self.line_numbers, 2),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Raw Data * : ", width = 10),(self.line_numbers, 2),line_id) )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
+            self.layout[len(self.layout)-1][0].insert(0,1)
 
-            self.layout.append( (tk.Label(self.frame, text = "Normalizations: ", width = 12),(self.line_numbers, 4),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Normalizations * : ", width = 14),(self.line_numbers, 4),line_id) )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
             self.layout.append( (tk.Entry(self.frame, width = 10),(self.line_numbers, 5),line_id+":B") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=5)
+            self.layout[len(self.layout)-1][0].insert(0,0)
             self.layout.append( (tk.Entry(self.frame, width = 10),(self.line_numbers, 6),line_id+":C") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=6)
+            self.layout[len(self.layout)-1][0].insert(0,0)
             self.layout.append( (tk.Entry(self.frame, width = 10),(self.line_numbers, 7),line_id+":D") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=7)
+            self.layout[len(self.layout)-1][0].insert(0,0)
             self.layout.append( (tk.Entry(self.frame, width = 10),(self.line_numbers, 8),line_id+":E") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=8)
+            self.layout[len(self.layout)-1][0].insert(0,1)
 
         elif line_id == "16":
-            self.layout.append( (tk.Label(self.frame, text = "Plot: ", width = 10),(self.line_numbers, 2),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Plot * : ", width = 10),(self.line_numbers, 2),line_id) )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
+            self.layout[len(self.layout)-1][0].insert(0,1)
 
         elif line_id in ["17","18","19"]:
             self.layout.append( (tk.Label(self.frame, text = "Normalization: ", width = 12),(self.line_numbers, 2),line_id) )
@@ -157,7 +167,7 @@ class Example(tk.Frame):
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 7),line_id+":D") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=7)
 
-            self.layout.append( (tk.Label(self.frame, text = "Supplementary: ", width = 12),(self.line_numbers, 8),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "5 Times Curve: ", width = 12),(self.line_numbers, 8),line_id) )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=8)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 9),line_id+":F") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=9)
@@ -549,7 +559,8 @@ class Example(tk.Frame):
         
     def create_lines(self):
         self.line_numbers += 1
-        tk.Button(self.frame, text="Generate File", command= self.get_entries, width = 10).grid(row=1,column=1)
+        tk.Button(self.frame, text="Generate File", command= self.get_entries, width = 10).grid(row=0,column=1)
+        tk.Label(self.frame, text="* Indicates Required", width = 15).grid(row=1,column=1)
         for line in self.lines:
             self.line_numbers += 1
             if line not in self.ignore_lines:
