@@ -456,9 +456,9 @@ class Example(tk.Frame):
                         # Line 20                                                  
                         if (i+1) != (entries_number/14):
                             
-                            f.write('0' + ' ' + dataB + ' '*(5-len(dataB)) + ' ' + dataC + ' ' + dataD + ' '*(5-len(dataD)) + ' '*22 + dataF + ' 0    ' + dataI + ' '*(6-len(dataB)) + ' ' + dataJ )
+                            f.write('0' + ' ' + dataB + ' '*(5-len(dataB)) + ' ' + dataC + ' ' + dataD + ' '*(5-len(dataD)) + ' '*22 + dataF + '      ' + dataI + ' '*(6-len(dataI)) + ' ' + dataJ )
                         else:
-                            f.write('1' + ' ' + dataB + ' '*(5-len(dataB)) + ' ' + dataC + ' ' + dataD + ' '*(5-len(dataD)) + ' '*22 + dataF + ' 0    ' + dataI + ' '*(6-len(dataB)) + ' ' + dataJ )
+                            f.write('1' + ' ' + dataB + ' '*(5-len(dataB)) + ' ' + dataC + ' ' + dataD + ' '*(5-len(dataD)) + ' '*22 + dataF + '      ' + dataI + ' '*(6-len(dataI)) + ' ' + dataJ )
                             
                         f.write('\n')
                         # Line 20A
