@@ -46,24 +46,24 @@ class Example(tk.Frame):
         self.create_lines()
         self.render_lines()
 
-        # Set the tool tips
-        self.set_tooltip_entries()
-
     def create_entries(self, line_id):
         if line_id == "01":
             self.layout.append( (tk.Label(self.frame, text = "File Type * : ", width = 9),(self.line_numbers, 2),line_id+"!file_type") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for File Type.")
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
             self.layout[len(self.layout)-1][0].insert(0,0)
         
             self.layout.append( (tk.Label(self.frame, text = "Factor * : ", width = 9),(self.line_numbers, 4),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Factor.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 5),line_id+":B") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=5)
             self.layout[len(self.layout)-1][0].insert(0,0)
 
             self.layout.append( (tk.Label(self.frame, text = "Number * : ", width = 9),(self.line_numbers, 6),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Number.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=6)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 7),line_id+":C") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=7)
@@ -71,11 +71,13 @@ class Example(tk.Frame):
             
         elif line_id == "03":
             self.layout.append( (tk.Label(self.frame, text = "Total: ", width = 7),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Total.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
         
             self.layout.append( (tk.Label(self.frame, text = "Subtotals: ", width = 9),(self.line_numbers, 4),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Subtotals.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
             self.layout.append( (tk.Entry(self.frame, width = 10),(self.line_numbers, 5),line_id+":B") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=5)
@@ -94,18 +96,21 @@ class Example(tk.Frame):
 
     
             self.layout.append( (tk.Label(self.frame, text = "Final Subtotal: ", width = 12),(self.line_numbers, 12),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Final Subtotal.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=12)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 13),line_id+":I") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=13)
             
         elif line_id in ["04","05","06","07","08","09","10","11","12"]:
             self.layout.append( (tk.Label(self.frame, text = "Subtotal: ", width = 7),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Subtotal.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":B") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
             
         elif line_id == "13":
             self.layout.append( (tk.Label(self.frame, text = "Names File * : ", width = 11),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Names File.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
@@ -113,12 +118,14 @@ class Example(tk.Frame):
             
         elif line_id == "14":
             self.layout.append( (tk.Label(self.frame, text = "Raw Data * : ", width = 10),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Raw Data.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
             self.layout[len(self.layout)-1][0].insert(0,1)
 
             self.layout.append( (tk.Label(self.frame, text = "Normalizations * : ", width = 14),(self.line_numbers, 4),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Normalizations.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
             self.layout.append( (tk.Entry(self.frame, width = 10),(self.line_numbers, 5),line_id+":B") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=5)
@@ -135,6 +142,7 @@ class Example(tk.Frame):
 
         elif line_id == "16":
             self.layout.append( (tk.Label(self.frame, text = "Plot * : ", width = 10),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Plot.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
@@ -142,42 +150,50 @@ class Example(tk.Frame):
 
         elif line_id in ["17","18","19"]:
             self.layout.append( (tk.Label(self.frame, text = "Normalization: ", width = 12),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Normalization.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
         
             self.layout.append( (tk.Label(self.frame, text = "Taxon: ", width = 5),(self.line_numbers, 4),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Taxon.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 5),line_id+":B") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=5)
 
         elif line_id == "20":
             self.layout.append( (tk.Label(self.frame, text = "Taxon: ", width = 6),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Taxon.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":B") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
         
             self.layout.append( (tk.Label(self.frame, text = "Norm. Type: ", width = 9),(self.line_numbers, 4),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Norm. Type:")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 5),line_id+":C") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=5)
 
             self.layout.append( (tk.Label(self.frame, text = "Taxon Norm.: ", width = 11),(self.line_numbers, 6),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Taxon Norm.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=6)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 7),line_id+":D") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=7)
 
             self.layout.append( (tk.Label(self.frame, text = "5 Times Curve: ", width = 12),(self.line_numbers, 8),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for 5 Times Curve.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=8)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 9),line_id+":F") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=9)
 
             self.layout.append( (tk.Label(self.frame, text = "H Scale: ", width = 7),(self.line_numbers, 10),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for H Scale.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=10)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 11),line_id+":I") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=11)
 
             self.layout.append( (tk.Label(self.frame, text = "Graph Label: ", width = 11),(self.line_numbers, 12),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Graph Label.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=12)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 13),line_id+":J") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=13)
@@ -185,170 +201,202 @@ class Example(tk.Frame):
 
         elif line_id == "20A":
             self.layout.append( (tk.Label(self.frame, text = "New Group: ", width = 9),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for New Group.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
         
             self.layout.append( (tk.Label(self.frame, text = "Taxon Group: ", width = 11),(self.line_numbers, 4),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Taxon Group.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 5),line_id+":B") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=5)
 
             self.layout.append( (tk.Label(self.frame, text = "Shading: ", width = 8),(self.line_numbers, 6),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Shading.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=6)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 7),line_id+":C") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=7)
 
             self.layout.append( (tk.Label(self.frame, text = "Angle: ", width = 12),(self.line_numbers, 8),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Angle.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=8)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 9),line_id+":D") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=9)
 
             self.layout.append( (tk.Label(self.frame, text = "Density: ", width = 7),(self.line_numbers, 10),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Density.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=10)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 11),line_id+":E") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=11)
 
             self.layout.append( (tk.Label(self.frame, text = "Plot Type: ", width = 11),(self.line_numbers, 12),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Plot Type.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=12)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 13),line_id+":F") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=13)
 
             self.layout.append( (tk.Label(self.frame, text = "Label: ", width = 7),(self.line_numbers, 14),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Label.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=14)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 15),line_id+":G") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=15)
 
             self.layout.append( (tk.Label(self.frame, text = "Label cont.: ", width = 11),(self.line_numbers, 16),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Label cont.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=16)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 17),line_id+":H") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=17)
 
         elif line_id == "21":
             self.layout.append( (tk.Label(self.frame, text = "Lines: ", width = 6),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Lines.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
         
             self.layout.append( (tk.Label(self.frame, text = "Strat. Column: ", width = 12),(self.line_numbers, 4),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Strat. Column.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 5),line_id+":B") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=5)
 
             self.layout.append( (tk.Label(self.frame, text = "Chron. Column: ", width = 12),(self.line_numbers, 6),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Chron. Column.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=6)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 7),line_id+":C") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=7)
 
             self.layout.append( (tk.Label(self.frame, text = "Font: ", width = 5),(self.line_numbers, 8),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Font.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=8)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 9),line_id+":D") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=9)
             
         elif line_id == "22":
             self.layout.append( (tk.Label(self.frame, text = "Height: ", width = 9),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Height.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
         
             self.layout.append( (tk.Label(self.frame, text = "Width: ", width = 11),(self.line_numbers, 4),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Width.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 5),line_id+":B") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=5)
 
             self.layout.append( (tk.Label(self.frame, text = "Depth Interval: ", width = 12),(self.line_numbers, 6),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Depth.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=6)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 7),line_id+":C") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=7)
 
             self.layout.append( (tk.Label(self.frame, text = "Chron. Interval: ", width = 12),(self.line_numbers, 8),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Chron. Interval.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=8)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 9),line_id+":D") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=9)
 
             self.layout.append( (tk.Label(self.frame, text = "H Scale Interval: ", width = 12),(self.line_numbers, 10),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for H Scale Interval.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=10)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 11),line_id+":E") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=11)
 
         elif line_id == "23":
             self.layout.append( (tk.Label(self.frame, text = "Zonation: ", width = 9),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Zonation.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
 
         elif line_id == "24":
             self.layout.append( (tk.Label(self.frame, text = "Vert. Label: ", width = 9),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Vert. Label.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
 
         elif line_id == "25":
             self.layout.append( (tk.Label(self.frame, text = "Plot Title: ", width = 9),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Plot Title.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
 
         elif line_id == "26":
             self.layout.append( (tk.Label(self.frame, text = "Midpoint Depth: ", width = 13),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Midpoint Depth.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":B") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
         
             self.layout.append( (tk.Label(self.frame, text = "Vert. Thickness: ", width = 13),(self.line_numbers, 4),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for File Type.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 5),line_id+":C") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=5)
 
             self.layout.append( (tk.Label(self.frame, text = "Sample Date: ", width = 10),(self.line_numbers, 6),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Sample Date.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=6)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 7),line_id+":D") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=7)
 
             self.layout.append( (tk.Label(self.frame, text = "Yrs. Uncertainty: ", width = 13),(self.line_numbers, 8),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Yrs. Uncertainty")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=8)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 9),line_id+":E") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=9)
 
             self.layout.append( (tk.Label(self.frame, text = "Label: ", width = 7),(self.line_numbers, 10),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Label.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=10)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 11),line_id+":F") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=11)
             
         elif line_id == "26A":
             self.layout.append( (tk.Label(self.frame, text = "Chron. Label: ", width = 11),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Chron. Label")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
 
         elif line_id == "27":
             self.layout.append( (tk.Label(self.frame, text = "Upper Bound: ", width = 11),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Upper Bound.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":B") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
         
             self.layout.append( (tk.Label(self.frame, text = "Boundary Type: ", width = 12),(self.line_numbers, 4),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Boundary Type.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 5),line_id+":C") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=5)
 
             self.layout.append( (tk.Label(self.frame, text = "Shading: ", width = 7),(self.line_numbers, 6),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Shading.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=6)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 7),line_id+":D") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=7)
 
             self.layout.append( (tk.Label(self.frame, text = "Strat. Label: ", width = 9),(self.line_numbers, 8),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Strat. Label.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=8)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 9),line_id+":E") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=9)
 
         elif line_id == "30":
             self.layout.append( (tk.Label(self.frame, text = "Zone Position: ", width = 11),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Zone Position.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":B") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
         
             self.layout.append( (tk.Label(self.frame, text = "Boundary Type: ", width = 12),(self.line_numbers, 4),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Boundary Type.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 5),line_id+":C") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=5)
@@ -392,11 +440,6 @@ class Example(tk.Frame):
 
         self.write_lines()
 
-    def set_tooltip_entries(self):
-        for widget in self.layout:
-            if widget[2][-2] == "!":
-                wckToolTips.register(widget[0], "This entry is used for x.")
-
     def write_lines(self):
         
         with open('file.instrs', 'wb+') as f:
@@ -408,6 +451,7 @@ class Example(tk.Frame):
                 # WRITE EACH LINE TO CALPALYN READABLE FILE
                 if line == "01":
                         f.write(data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:9])
+                        f.write(" "*81+"// Line 1")
                         f.write('\n')
 
                 elif line == "02":
@@ -486,7 +530,7 @@ class Example(tk.Frame):
                         dataC = data.next().get()[:6]
                         dataD = data.next().get()[:6]
                         dataE = data.next().get()[:6]
-                        f.write(dataA + ' '*(6-len(dataA)) + ' ' + dataB + ' '*(6-len(dataB)) + ' ' + dataC + ' '*(6-len(dataC)) + ' ' + dataD + ' '*(6-len(dataD)) + ' ' + dataE)
+                        f.write(' ' + dataA + ' '*(6-len(dataA)) + ' ' + dataB + ' '*(6-len(dataB)) + ' ' + dataC + ' '*(6-len(dataC)) + ' ' + dataD + ' '*(6-len(dataD)) + ' ' + dataE)
                         f.write('\n')
 
                 elif line == "23":
@@ -553,6 +597,7 @@ class Example(tk.Frame):
                             f.write('1' + ' ' + dataB + ' '*(7-len(dataB)) + ' ' + dataC)
                         
                         f.write('\n')
+            
                     
 
             
