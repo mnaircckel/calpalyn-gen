@@ -1,5 +1,6 @@
 from collections import defaultdict
 import Tkinter as tk
+import math
 import wckToolTips
 
 class Example(tk.Frame):
@@ -355,7 +356,7 @@ class Example(tk.Frame):
         self.entries = defaultdict(list)
         for widget in self.layout:
             if widget[2][-2] == ":":
-                    if widget[2][:3] in ["20A","26A"]:
+                    if widget[2][:3] == "26A":
                         self.entries[widget[2][:3]].append(widget[0])
                     else:
                         self.entries[widget[2][:2]].append(widget[0])
@@ -372,7 +373,6 @@ class Example(tk.Frame):
         with open('file.instrs', 'wb+') as f:
             
             for line in self.lines:
-                print(line)
                 entries_number = len(self.entries[line])
                 data = iter(self.entries[line])
 
@@ -405,29 +405,58 @@ class Example(tk.Frame):
                         f.write(data.next().get()[:1] + ' ' + data.next().get()[:5])
                         f.write('\n')
 
+                
+                # Line 20 handles lines 20 and 20A
                 elif line == "20":
-                    for i in range(entries_number/6):
-                        
+                    for i in range(entries_number/14):
+
+                        # Line 20 entries
                         dataB = data.next().get()[:5]
                         dataC = data.next().get()[:1]
                         dataD = data.next().get()[:5]
                         dataF = data.next().get()[:1]
                         dataI = data.next().get()[:6]
                         dataJ = data.next().get()[:30]
-                                                  
-                        if (i+1) != (entries_number/6):
+
+                        # Line 20A entries
+                        data1A = data.next().get()[:1]
+                        data1B = data.next().get()[:1]
+                        data1C = data.next().get()[:1]
+                        data1D = data.next().get()[:7]
+                        data1E = data.next().get()[:2]
+                        data1F = data.next().get()[:1]
+                        data1G = data.next().get()[:30]
+                        data1H = data.next().get()[:30]
+
+                        # Line 20                                                  
+                        if (i+1) != (entries_number/14):
                             
                             f.write('0' + ' ' + dataB + ' '*(5-len(dataB)) + ' ' + dataC + ' ' + dataD + ' '*(5-len(dataD)) + ' '*22 + dataF + ' 0    ' + dataI + ' '*(6-len(dataB)) + ' ' + dataJ )
                         else:
                             f.write('1' + ' ' + dataB + ' '*(5-len(dataB)) + ' ' + dataC + ' ' + dataD + ' '*(5-len(dataD)) + ' '*22 + dataF + ' 0    ' + dataI + ' '*(6-len(dataB)) + ' ' + dataJ )
                             
                         f.write('\n')
-                        
+                        # Line 20A
+                        f.write(data1A + ' ' + data1B + ' ' + data1C + ' ' + data1D + ' '*(7-len(data1D)) + ' ' + data1E + ' '*(2-len(data1E)) + ' ' + data1F + ' ' + data1G + ' '*(30-len(data1G)) + ' ' + data1G + ' '*(30-len(data1H)) )
+                        f.write('\n')
                         
 
                 elif line == "21":
                         f.write(data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1])
-                        f.write('\n')                  
+                        f.write('\n')
+
+                elif line  == "22":
+                        dataA = data.next().get()[:6]
+                        dataB = data.next().get()[:6]
+                        dataC = data.next().get()[:6]
+                        dataD = data.next().get()[:6]
+                        dataE = data.next().get()[:6]
+                        f.write(dataA + ' '*(6-len(dataA)) + ' ' + dataB + ' '*(6-len(dataB)) + ' ' + dataC + ' '*(6-len(dataC)) + ' ' + dataD + ' '*(6-len(dataD)) + ' ' + dataE)
+                        f.write('\n')
+
+                elif line == "23":
+                        f.write(data.next().get()[:2])
+                        f.write('\n')                   
 
                 elif line == "24":
                         f.write(data.next().get()[:40])
@@ -437,9 +466,54 @@ class Example(tk.Frame):
                         f.write(data.next().get()[:80])
                         f.write('\n')
 
+                elif line == "26":
+                    for i in range(entries_number/5):
+                                            
+                        dataB = data.next().get()[:7]
+                        dataC = data.next().get()[:7]
+                        dataD = data.next().get()[:7]
+                        dataE = data.next().get()[:7]
+                        dataF = data.next().get()[:8]
+                        
+                        if (i+1) != (entries_number/5):
+                            f.write('0' + ' ' + dataB + ' '*(7-len(dataB)) + ' ' + dataC + ' '*(7-len(dataC)) + ' ' + dataD + ' '*(7-len(dataD)) + ' ' + dataE + ' '*(7-len(dataE)) + ' ' + dataF)
+                        else:
+                            f.write('1' + ' ' + dataB + ' '*(7-len(dataB)) + ' ' + dataC + ' '*(7-len(dataC)) + ' ' + dataD + ' '*(7-len(dataD)) + ' ' + dataE + ' '*(7-len(dataE)) + ' ' + dataF)
+                        f.write('\n')
+
                 elif line == "26A":
                         f.write(data.next().get()[:30])
                         f.write('\n')
+
+                elif line == "27":
+                    for i in range(entries_number/4):
+                        dataB = data.next().get()[:7]
+                        dataC = data.next().get()[:1]
+                        dataD = data.next().get()[:7]
+                        dataE = data.next().get()
+                        num_dataE = int(math.ceil(len(dataE)/12))
+
+                        if (i+1) != (entries_number/4):
+                            f.write('0' + ' ' + dataB + ' '*(7-len(dataB)) + ' ' + dataC + ' ' + dataD + ' '*(7-len(dataD)) + ' '*16)
+                        else:
+                            f.write('1' + ' ' + dataB + ' '*(7-len(dataB)) + ' ' + dataC + ' ' + dataD + ' '*(7-len(dataD)) + ' '*16)
+                        for i in range(num_dataE):
+                            f.write(dataE[0+i*12:12+i*12] + ' ')
+                        f.write('\n')
+
+
+                elif line == "30":
+                    for i in range(entries_number/2):
+                        dataB = data.next().get()[:7]
+                        dataC = data.next().get()[:1]
+
+                        if (i+1) != (entries_number/2):
+                            f.write('0' + ' ' + dataB + ' '*(7-len(dataB)) + ' ' + dataC)
+                        else:
+                            f.write('1' + ' ' + dataB + ' '*(7-len(dataB)) + ' ' + dataC)
+                        
+                        f.write('\n')
+                    
 
             
         
