@@ -3,6 +3,11 @@ import Tkinter as tk
 import math
 import wckToolTips
 
+# Author: Marcel Champagne
+# This program is written in Tkinter, using a library wckToolTips in order to have tool tip functionality
+# The basic frame is made so there can be a vertical scroll bar, this way the user may create as many lines as possible
+
+# Base tk Frame class
 class Example(tk.Frame):
     def __init__(self, root):
 
@@ -20,14 +25,28 @@ class Example(tk.Frame):
 
         self.frame.bind("<Configure>", self.onFrameConfigure)
 
+        # Variables keep track of which lines exist in the calpalyn program, lines 20, 26, 27, and 30 may repeat
         self.lines = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","20A","21","22","23","24","25","26","26A","27","28","29","30"] 
         self.repeating_lines = ["20","26","27","30"]
+
+        # Lines 02 15 28 and 29 are ignored in this front end version of calpalyn --
+        # they are automatically written to the file in the specified format but don't take user input
         self.ignore_lines = ["02","15","28","29"]
+
+        # Layout stores all the widgets in a list with a line identifer
         self.layout = []
+
+        # Entries contains all the widgets that are entries (not labels and buttons)
         self.entries = []
+
+        # Keep track off the number of line numbers
         self.line_numbers = 0
+
+        # Create the intial lines and render them as a form
         self.create_lines()
         self.render_lines()
+
+        # Set the tool tips
         self.set_tooltip_entries()
 
     def create_entries(self, line_id):
@@ -381,6 +400,9 @@ class Example(tk.Frame):
                         f.write(data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:9])
                         f.write('\n')
 
+                elif line == "02":
+                    f.write('1\n')
+
                 elif line == "03":
                         f.write(data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1])
                         f.write('\n')
@@ -392,6 +414,9 @@ class Example(tk.Frame):
                 elif line == "13":
                         f.write(data.next().get()[:1])
                         f.write('\n')
+                        
+                elif line == "15":
+                    f.write('1\n')
 
                 elif line == "14":
                         f.write(data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1] + ' ' + data.next().get()[:1])
@@ -501,6 +526,11 @@ class Example(tk.Frame):
                             f.write(dataE[0+i*12:12+i*12] + ' ')
                         f.write('\n')
 
+                elif line == "28":
+                    f.write('0\n')
+
+                elif line == "29":
+                    f.write('1\n')
 
                 elif line == "30":
                     for i in range(entries_number/2):
