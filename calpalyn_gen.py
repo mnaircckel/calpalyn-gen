@@ -598,7 +598,7 @@ class Example(tk.Frame):
                         dataC = data.next().get()[:1]
                         dataD = data.next().get()[:7]
                         dataE = data.next().get()
-                        num_dataE = int(math.ceil(len(dataE)/12))
+                        num_dataE = int(math.ceil(len(dataE)/12.0))
 
                         if (i+1) != (entries_number/4):
                             f.write('0' + ' ' + dataB + ' '*(7-len(dataB)) + ' ' + dataC + ' '*(1-len(dataC))  + ' ' + dataD + ' '*(7-len(dataD)) + ' '*16)
