@@ -601,9 +601,9 @@ class Example(tk.Frame):
                         num_dataE = int(math.ceil(len(dataE)/12.0))
 
                         if (i+1) != (entries_number/4):
-                            f.write('0' + ' ' + dataB + ' '*(7-len(dataB)) + ' ' + dataC + ' '*(1-len(dataC))  + ' ' + dataD + ' '*(7-len(dataD)) + ' '*16)
+                            f.write('0' + ' ' + dataB + ' '*(7-len(dataB)) + ' ' + dataC + ' '*(1-len(dataC))  + ' ' + dataD + ' '*(7-len(dataD)) + ' '*17)
                         else:
-                            f.write('1' + ' ' + dataB + ' '*(7-len(dataB)) + ' ' + dataC + ' '*(1-len(dataC))  + ' ' + dataD + ' '*(7-len(dataD)) + ' '*16)
+                            f.write('1' + ' ' + dataB + ' '*(7-len(dataB)) + ' ' + dataC + ' '*(1-len(dataC))  + ' ' + dataD + ' '*(7-len(dataD)) + ' '*17)
                         for i in range(num_dataE):
                             f.write(dataE[0+i*12:12+i*12] + ' ')
                         f.write(" "*81+"//Line "+str(line))
