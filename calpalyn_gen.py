@@ -51,7 +51,7 @@ class Example(tk.Frame):
     def create_entries(self, line_id):
         if line_id == "01":
             self.layout.append( (tk.Label(self.frame, text = "File Type * : ", width = 17),(self.line_numbers, 2),line_id+"!file_type") )
-            self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2, sticky = tk.W)
+            self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for File Type.")
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
@@ -439,7 +439,6 @@ class Example(tk.Frame):
                 # WRITE EACH LINE TO CALPALYN READABLE FILE
                 if line == "01":
                         dataA = data.next().get()[:1]
-                        dataB = data.next().get()[:1]
                         
                         f.write(dataA + ' '*(1-len(dataA)) +  ' ' + '0' + ' ' + data.next().get()[:9])
                         f.write(" "*81+"//Line "+str(line))
