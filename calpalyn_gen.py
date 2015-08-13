@@ -390,29 +390,29 @@ class Example(tk.Frame):
     def new_line20(self):
         self.line_numbers += 1
         self.create_entries("20")
-        self.layout.append( (tk.Label(self.frame, relief="groove", text="Line 20", width = 8),(self.line_numbers, 1),"20") )
+        self.layout.append( (tk.Label(self.frame, anchor = "w", font = "Verdana 13 bold", relief = "raised", text="Line 20", width = 30, height = 1),(self.line_numbers, 1),"20") )
         self.layout[len(self.layout)-1][0].grid(row=self.line_numbers,column=1)
         self.line_numbers += 1
         self.create_entries("20A")
-        self.layout.append( (tk.Label(self.frame, relief="groove", text="Line 20A", width = 8),(self.line_numbers, 1),"20A") )
+        self.layout.append( (tk.Label(self.frame, anchor = "w", font = "Verdana 13 bold", relief = "raised", text="Line 20A", width = 30, height = 1),(self.line_numbers, 1),"20A") )
         self.layout[len(self.layout)-1][0].grid(row=self.line_numbers,column=1)
 
     def new_line26(self):
         self.line_numbers += 1
         self.create_entries("26")
-        self.layout.append( (tk.Label(self.frame, relief="groove", text="Line 26", width = 8),(self.line_numbers, 1),"26") )
+        self.layout.append( (tk.Label(self.frame, anchor = "w", font = "Verdana 13 bold", relief = "raised", text="Line 26", width = 30, height = 1),(self.line_numbers, 1),"26") )
         self.layout[len(self.layout)-1][0].grid(row=self.line_numbers,column=1)
         
     def new_line27(self):
         self.line_numbers += 1
         self.create_entries("27")
-        self.layout.append( (tk.Label(self.frame, relief="groove", text="Line 27", width = 8),(self.line_numbers, 1),"27") )
+        self.layout.append( (tk.Label(self.frame, anchor = "w", font = "Verdana 13 bold", relief = "raised", text="Line 27", width = 30, height = 1),(self.line_numbers, 1),"27") )
         self.layout[len(self.layout)-1][0].grid(row=self.line_numbers,column=1)
         
     def new_line30(self):
         self.line_numbers += 1
         self.create_entries("30")
-        self.layout.append( (tk.Label(self.frame, relief="groove", text="Line 30", width = 8),(self.line_numbers, 1),"20") )
+        self.layout.append( (tk.Label(self.frame, anchor = "w", font = "Verdana 13 bold", relief = "raised", text="Line 30", width = 30, height = 1),(self.line_numbers, 1),"20") )
         self.layout[len(self.layout)-1][0].grid(row=self.line_numbers,column=1)
 
     def get_entries(self):
@@ -674,7 +674,7 @@ class Example(tk.Frame):
             self.line_numbers += 1
             if line not in self.ignore_lines:
                 self.create_entries(line)
-            self.layout.append( (tk.Label(self.frame, anchor = "w", font = "Verdana 13 bold", relief = "raised", text="Line " + line + ": " + self.line_descriptions[line], width = 30),(self.line_numbers, 1),line) )
+            self.layout.append( (tk.Label(self.frame, anchor = "w", font = "Verdana 13 bold", relief = "raised", text="Line " + line + ": " + self.line_descriptions[line], width = 30, height = 1),(self.line_numbers, 1),line) )
             
             if line in self.repeating_lines:
                 if line == "20":
