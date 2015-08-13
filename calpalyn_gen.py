@@ -26,7 +26,9 @@ class Example(tk.Frame):
         self.frame.bind("<Configure>", self.onFrameConfigure)
 
         # Variables keep track of which lines exist in the calpalyn program, lines 20, 26, 27, and 30 may repeat
-        self.lines = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","20A","21","22","23","24","25","26","26A","27","28","29","30"] 
+        self.lines = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","20A","21","22","23","24","25","26","26A","27","28","29","30"]
+
+        self.line_descriptions = {"01": "","02": "","03": "Total/Subtotals","04": "","05": "","06": "","07": "","08": "","09": "", "10": "","11": "","12": "","13": "Taxa File","14": "calpalyn.listing File","15": "","16": "Plot Graph","17": "calpalyn.listing Normalization","18": "\"","19": "\"","20": "Graph Options","20A": "Graph Format","21": "Graph Elements","22": "Graph Scaling","23": "Pollen Zonation","24": "Vertical Axis","25": "Plot Title","26": "Chronology Column","26A": "Chronology Label","27": "Stratigraphy Column","28": "","29": "","30": "Pollen Zones"}
         self.repeating_lines = ["20","26","27","30"]
 
         # Lines 02 15 28 and 29 are ignored in this front end version of calpalyn --
@@ -48,25 +50,18 @@ class Example(tk.Frame):
 
     def create_entries(self, line_id):
         if line_id == "01":
-            self.layout.append( (tk.Label(self.frame, text = "File Type * : ", width = 9),(self.line_numbers, 2),line_id+"!file_type") )
-            self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
+            self.layout.append( (tk.Label(self.frame, text = "File Type * : ", width = 17),(self.line_numbers, 2),line_id+"!file_type") )
+            self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2, sticky = tk.W)
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for File Type.")
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
             self.layout[len(self.layout)-1][0].insert(0,0)
-        
-            self.layout.append( (tk.Label(self.frame, text = "Factor * : ", width = 9),(self.line_numbers, 4),line_id) )
-            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Factor.")
-            self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
-            self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 5),line_id+":B") )
-            self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=5)
-            self.layout[len(self.layout)-1][0].insert(0,0)
 
-            self.layout.append( (tk.Label(self.frame, text = "Number * : ", width = 9),(self.line_numbers, 6),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Level Factor * : ", width = 13),(self.line_numbers, 4),line_id) )
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Number.")
-            self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=6)
-            self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 7),line_id+":C") )
-            self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=7)
+            self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
+            self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 5),line_id+":C") )
+            self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=5)
             self.layout[len(self.layout)-1][0].insert(0,-1.0)
             
         elif line_id == "03":
@@ -76,7 +71,7 @@ class Example(tk.Frame):
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
         
-            self.layout.append( (tk.Label(self.frame, text = "Subtotals: ", width = 9),(self.line_numbers, 4),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Subtotals (5-12):", width = 16),(self.line_numbers, 4),line_id) )
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Subtotals.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
             self.layout.append( (tk.Entry(self.frame, width = 10),(self.line_numbers, 5),line_id+":B") )
@@ -93,23 +88,26 @@ class Example(tk.Frame):
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=10)
             self.layout.append( (tk.Entry(self.frame, width = 10),(self.line_numbers, 11),line_id+":H") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=11)
-
-    
-            self.layout.append( (tk.Label(self.frame, text = "Final Subtotal: ", width = 12),(self.line_numbers, 12),line_id) )
-            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Final Subtotal.")
+            self.layout.append( (tk.Entry(self.frame, width = 10),(self.line_numbers, 12),line_id+":I") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=12)
-            self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 13),line_id+":I") )
-            self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=13)
+
+
+        elif line_id == "04":
+            self.layout.append( (tk.Label(self.frame, text = "Excluded Taxa: ", width = 15),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Subtotal.")
+            self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
+            self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":B") )
+            self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
             
-        elif line_id in ["04","05","06","07","08","09","10","11","12"]:
-            self.layout.append( (tk.Label(self.frame, text = "Subtotal: ", width = 7),(self.line_numbers, 2),line_id) )
+        elif line_id in ["05","06","07","08","09","10","11","12"]:
+            self.layout.append( (tk.Label(self.frame, text = "Subtotal Taxa: ", width = 15),(self.line_numbers, 2),line_id) )
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Subtotal.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":B") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
             
         elif line_id == "13":
-            self.layout.append( (tk.Label(self.frame, text = "Names File * : ", width = 11),(self.line_numbers, 2),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Taxon Names * : ", width = 15),(self.line_numbers, 2),line_id) )
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Names File.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
@@ -186,13 +184,13 @@ class Example(tk.Frame):
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 9),line_id+":F") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=9)
 
-            self.layout.append( (tk.Label(self.frame, text = "H Scale: ", width = 7),(self.line_numbers, 10),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "H. Interval: ", width = 10),(self.line_numbers, 10),line_id) )
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for H Scale.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=10)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 11),line_id+":I") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=11)
 
-            self.layout.append( (tk.Label(self.frame, text = "Graph Label: ", width = 11),(self.line_numbers, 12),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "H. Graph Label: ", width = 14),(self.line_numbers, 12),line_id) )
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Graph Label.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=12)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 13),line_id+":J") )
@@ -218,13 +216,13 @@ class Example(tk.Frame):
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 7),line_id+":C") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=7)
 
-            self.layout.append( (tk.Label(self.frame, text = "Angle: ", width = 12),(self.line_numbers, 8),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Line Angle: ", width = 12),(self.line_numbers, 8),line_id) )
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Angle.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=8)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 9),line_id+":D") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=9)
 
-            self.layout.append( (tk.Label(self.frame, text = "Density: ", width = 7),(self.line_numbers, 10),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Line Density: ", width = 13),(self.line_numbers, 10),line_id) )
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Density.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=10)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 11),line_id+":E") )
@@ -237,7 +235,7 @@ class Example(tk.Frame):
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=13)
 
         elif line_id == "21":
-            self.layout.append( (tk.Label(self.frame, text = "Lines: ", width = 6),(self.line_numbers, 2),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Level Lines: ", width =12),(self.line_numbers, 2),line_id) )
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Lines.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
@@ -255,20 +253,20 @@ class Example(tk.Frame):
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 7),line_id+":C") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=7)
 
-            self.layout.append( (tk.Label(self.frame, text = "Font: ", width = 5),(self.line_numbers, 8),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Enlarged Font: ", width = 12),(self.line_numbers, 8),line_id) )
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Font.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=8)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 9),line_id+":D") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=9)
             
         elif line_id == "22":
-            self.layout.append( (tk.Label(self.frame, text = "Height: ", width = 9),(self.line_numbers, 2),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Diagram Height: ", width = 13),(self.line_numbers, 2),line_id) )
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Height.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
         
-            self.layout.append( (tk.Label(self.frame, text = "Width: ", width = 11),(self.line_numbers, 4),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Diagram Width: ", width = 13),(self.line_numbers, 4),line_id) )
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Width.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=4)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 5),line_id+":B") )
@@ -286,14 +284,14 @@ class Example(tk.Frame):
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 9),line_id+":D") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=9)
 
-            self.layout.append( (tk.Label(self.frame, text = "H Scale Interval: ", width = 12),(self.line_numbers, 10),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "H. Interval Size: ", width = 13),(self.line_numbers, 10),line_id) )
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for H Scale Interval.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=10)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 11),line_id+":E") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=11)
 
         elif line_id == "23":
-            self.layout.append( (tk.Label(self.frame, text = "Zonation: ", width = 9),(self.line_numbers, 2),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Pollen Zonation: ", width = 13),(self.line_numbers, 2),line_id) )
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Zonation.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
@@ -338,7 +336,7 @@ class Example(tk.Frame):
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 9),line_id+":E") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=9)
 
-            self.layout.append( (tk.Label(self.frame, text = "Label: ", width = 7),(self.line_numbers, 10),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Substance Label: ", width = 13),(self.line_numbers, 10),line_id) )
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Label.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=10)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 11),line_id+":F") )
@@ -370,14 +368,14 @@ class Example(tk.Frame):
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 7),line_id+":D") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=7)
 
-            self.layout.append( (tk.Label(self.frame, text = "Strat. Label: ", width = 9),(self.line_numbers, 8),line_id) )
-            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Strat. Label.")
+            self.layout.append( (tk.Label(self.frame, text = "Zone Label: ", width = 9),(self.line_numbers, 8),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Zone Label.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=8)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 9),line_id+":E") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=9)
 
         elif line_id == "30":
-            self.layout.append( (tk.Label(self.frame, text = "Zone Position: ", width = 11),(self.line_numbers, 2),line_id) )
+            self.layout.append( (tk.Label(self.frame, text = "Zone Boundary: ", width = 13),(self.line_numbers, 2),line_id) )
             wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for Zone Position.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":B") )
@@ -443,7 +441,7 @@ class Example(tk.Frame):
                         dataA = data.next().get()[:1]
                         dataB = data.next().get()[:1]
                         
-                        f.write(dataA + ' '*(1-len(dataA)) +  ' ' + dataB + ' '*(1-len(dataB)) + ' ' + data.next().get()[:9])
+                        f.write(dataA + ' '*(1-len(dataA)) +  ' ' + '0' + ' ' + data.next().get()[:9])
                         f.write(" "*81+"//Line "+str(line))
                         f.write('\n')
 
@@ -635,8 +633,8 @@ class Example(tk.Frame):
         
     def create_lines(self, these_lines):
         self.line_numbers += 1
-        tk.Button(self.frame, text="Generate File", command= self.write_lines, width = 10).grid(row=0,column=1)
-        tk.Button(self.frame, text="Load Form", command= self.read_lines, width = 10).grid(row=1,column=1)
+        tk.Button(self.frame, text="Generate Instruction File", command= self.write_lines, width = 20).grid(row=0,column=1)
+        tk.Button(self.frame, text="Load Instruction File", command= self.read_lines, width = 20).grid(row=1,column=1)
         tk.Label(self.frame, text="* Indicates Required", width = 15).grid(row=1,column=2)
         self.create_form(these_lines)
 
@@ -672,11 +670,12 @@ class Example(tk.Frame):
                     
 
     def create_form(self,these_lines):
+                             
         for line in these_lines:
             self.line_numbers += 1
             if line not in self.ignore_lines:
                 self.create_entries(line)
-            self.layout.append( (tk.Label(self.frame, relief="groove", text="Line " + line, width = 8),(self.line_numbers, 1),line) )
+            self.layout.append( (tk.Label(self.frame, anchor = "w", font = "Verdana 13 bold", relief = "raised", text="Line " + line + ": " + self.line_descriptions[line], width = 30),(self.line_numbers, 1),line) )
             
             if line in self.repeating_lines:
                 if line == "20":
