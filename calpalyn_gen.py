@@ -633,7 +633,7 @@ class Example(tk.Frame):
     def create_lines(self, these_lines):
         self.line_numbers += 1
         tk.Button(self.frame, text="Generate Instruction File", command= self.write_lines, width = 20).grid(row=0,column=1)
-        tk.Button(self.frame, text="Load Instruction File", command= self.read_lines, width = 20).grid(row=1,column=1)
+        tk.Button(self.frame, text="Clear All Fields", command= self.read_lines, width = 20).grid(row=1,column=1)
         tk.Label(self.frame, text="* Indicates Required", width = 15).grid(row=1,column=2)
         self.create_form(these_lines)
 
@@ -666,7 +666,23 @@ class Example(tk.Frame):
         self.get_entries()
 
         self.render_lines()
-                    
+
+    def remove_last_line(self):
+        to_remove = []
+
+        if self.line_numbers <= 33:
+            return
+        
+        for widget in self.layout:
+            print(widget[1][0],self.line_numbers)
+            if widget[1][0] == self.line_numbers:
+                widget[0].destroy()
+                to_remove.append(widget)
+                
+        for widget in to_remove:
+            self.layout.remove(widget)
+
+        self.line_numbers -= 1
 
     def create_form(self,these_lines):
                              
@@ -685,8 +701,9 @@ class Example(tk.Frame):
                     self.layout.append( (tk.Button(self.frame, text="+", command= self.new_line27, width = 8),(self.line_numbers, 999),line) )
                 elif line == "30":
                     self.layout.append( (tk.Button(self.frame, text="+", command= self.new_line30, width = 8),(self.line_numbers, 999),line) )
-        
-            
+                    
+        self.layout.append( (tk.Button(self.frame, text="Remove Last Line", command= self.remove_last_line, width = 14),(0, 2),line) )
+               
                 
     def render_lines(self):
         for widget in self.layout:
