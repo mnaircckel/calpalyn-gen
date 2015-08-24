@@ -198,8 +198,8 @@ class Example(tk.Frame):
 
 
         elif line_id == "20A":
-            self.layout.append( (tk.Label(self.frame, text = "New Group: ", width = 9),(self.line_numbers, 2),line_id) )
-            wckToolTips.register(self.layout[len(self.layout)-1][0], "This entry is used for New Group.")
+            self.layout.append( (tk.Label(self.frame, text = "New Group * : ", width = 12),(self.line_numbers, 2),line_id) )
+            wckToolTips.register(self.layout[len(self.layout)-1][0], "If you have two taxa next to each other both with 'blank' labels, you must specify both as new taxon groups.")
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=2)
             self.layout.append( (tk.Entry(self.frame, width = 6),(self.line_numbers, 3),line_id+":A") )
             self.layout[len(self.layout)-1][0].grid(row=self.line_numbers, column=3)
