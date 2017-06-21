@@ -436,11 +436,12 @@ class Example(tk.Frame):
                 entries_number = len(self.entries[line])
                 data = iter(self.entries[line])
 
-                # WRITE EACH LINE TO CALPALYN READABLE FILE
+                # Format each line and write it to instruction file for use by Calpalyn
                 if line == "01":
                         dataA = data.next().get()[:1]
+                        dataB = data.next().get()[:9]
                         
-                        f.write(dataA + ' '*(1-len(dataA)) +  ' ' + '0' + ' ' + data.next().get()[:9])
+                        f.write(dataA + ' '*(1-len(dataA)) +  ' ' + '0' + ' ' + dataB)
                         f.write(" "*81+"//Line "+str(line))
                         f.write('\n')
 
@@ -464,12 +465,14 @@ class Example(tk.Frame):
                         f.write('\n')
 
                 elif line in ["04","05","06","07","08","09","10","11","12"]:
-                        f.write('1' + ' ' + data.next().get()[:75])
+                        dataA = data.next().get()[:75]
+                        f.write('1' + ' ' + dataA)
                         f.write(" "*81+"//Line "+str(line))
                         f.write('\n')
 
                 elif line == "13":
-                        f.write(data.next().get()[:1])
+                        dataA = data.next().get()[:1]
+                        f.write(dataA)
                         f.write(" "*81+"//Line "+str(line))
                         f.write('\n')
                         
@@ -489,13 +492,15 @@ class Example(tk.Frame):
                         f.write('\n')
 
                 elif line == "16":
-                        f.write(data.next().get()[:1])
+                        dataA = data.next().get()[:1]
+                        f.write(dataA)
                         f.write(" "*81+"//Line "+str(line))
                         f.write('\n')
                         
                 elif line in ["17", "18", "19"]:
                         dataA = data.next().get()[:1]
-                        f.write(dataA + ' '*(1-len(dataA)) + ' ' + data.next().get()[:5])
+                        dataB = data.next().get()[:5]
+                        f.write(dataA + ' '*(1-len(dataA)) + ' ' + dataB)
                         f.write(" "*81+"//Line "+str(line))
                         f.write('\n')
 
@@ -554,17 +559,20 @@ class Example(tk.Frame):
                         f.write('\n')
 
                 elif line == "23":
-                        f.write(data.next().get()[:2])
+                        dataA = data.next().get()[:2]
+                        f.write(dataA)
                         f.write(" "*81+"//Line "+str(line))
                         f.write('\n')                   
 
                 elif line == "24":
-                        f.write(data.next().get()[:40])
+                        dataA = data.next().get()[:40]
+                        f.write(dataA)
                         f.write(" "*81+"//Line "+str(line))
                         f.write('\n')
 
                 elif line == "25":
-                        f.write(data.next().get()[:80])
+                        dataA = data.next().get()[:80] 
+                        f.write(dataA)
                         f.write(" "*81+"//Line "+str(line))
                         f.write('\n')
 
@@ -585,7 +593,8 @@ class Example(tk.Frame):
                         f.write('\n')
 
                 elif line == "26A":
-                        f.write(data.next().get()[:30])
+                        dataA = data.next().get()[:30]
+                        f.write(dataA)
                         f.write(" "*81+"//Line "+str(line))
                         f.write('\n')
 
